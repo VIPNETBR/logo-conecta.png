@@ -1,20 +1,12 @@
 # Telegram Scraper
 
-Sistema automatizado para extraer y agregar miembros de grupos de Telegram, gestionado desde un menú interactivo.
+Sistema automatizado para agregar cuentas de Telegram, hacer scraping y agregar miembros a grupos.
 
 ---
 
-## Requisitos
+## Instalación Automática
 
-- VPS con Ubuntu/Debian
-- Python 3.8+
-- Acceso root o permisos sudo
-
----
-
-## Instalación automática
-
-Ejecuta el siguiente comando en tu VPS para instalar todo automáticamente:
+Ejecuta este comando para instalar o actualizar el sistema en tu VPS Ubuntu desde cero:
 
 ```bash
-wget https://raw.githubusercontent.com/VIPNETBR/telegram-scraper/main/install.sh -O install.sh && chmod +x install.sh && ./install.sh
+bash <(curl -s https://raw.githubusercontent.com/VIPNETBR/telegram-scraper/main/install.sh)
