@@ -15,7 +15,7 @@ rm -rf "$WORKDIR"
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
-echo "[+] Descargando proyecto..."
+echo "[+] Descargando proyecto desde GitHub..."
 wget -q https://github.com/VIPNETBR/telegram-scraper/raw/main/telegram-scraper.zip -O telegram-scraper.zip
 
 echo "[+] Descomprimiendo..."
@@ -25,9 +25,8 @@ rm telegram-scraper.zip
 echo "[+] Creando entorno virtual..."
 python3 -m venv venv
 
+echo "[+] Activando entorno virtual e instalando dependencias Python..."
 source venv/bin/activate
-
-echo "[+] Instalando dependencias Python..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
@@ -41,8 +40,8 @@ chmod +x menu
 sudo ln -sf "$WORKDIR/menu" /usr/local/bin/menu
 sudo chmod +x /usr/local/bin/menu
 
-echo "[+] Configurando ejecución automática diaria (cron)..."
+echo "[+] Configurando ejecución automática diaria con cron..."
 (crontab -l 2>/dev/null | grep -v 'menu ejecutar_scraper'; echo "0 3 * * * cd $WORKDIR && source venv/bin/activate && python3 menu.py ejecutar_scraper >> $WORKDIR/scraper.log 2>&1") | crontab -
 
 echo "[+] Instalación completada."
-echo "Ejecuta 'menu' para iniciar el sistema."
+echo "Ejecuta el comando 'menu' para iniciar el sistema."
