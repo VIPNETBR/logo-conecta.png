@@ -39,9 +39,10 @@ telegram-scraper/
 └── README.md             # Esta guía
 
 ✅Script comando instalacion completa:
-
+```bash
 sudo apt update && sudo apt install git unzip -y && \
 git clone https://github.com/VIPNETBR/telegram-scraper.git && \
 cd telegram-scraper && \
 bash install.sh && \
 bash menu
+```
