@@ -1,12 +1,12 @@
-# 📦 Telegram Scraper XPSSH (Estilo SSH Plus)
+# 🤖 Telegram Scraper VPS
 
-Sistema avanzado y automático para agregar usuarios de Telegram desde grupos públicos hacia tu grupo destino. ✅
+Sistema completo y automático para extraer y agregar miembros de grupos públicos de Telegram usando múltiples cuentas.
 
 ---
 
-## 🚀 Instalación automática (1 solo comando)
+## 🚀 Instalación rápida
 
-Pega este comando en tu VPS (Ubuntu 20/22/24):
+Ejecuta este comando en tu VPS Ubuntu (20/22/24) para instalar todo automáticamente:
 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/VIPNETBR/telegram-scraper/main/install.sh)
