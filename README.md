@@ -9,4 +9,10 @@ Sistema automatizado para extraer y agregar miembros entre grupos de Telegram, c
 Ejecuta este comando en tu VPS para instalar todo automáticamente:
 
 ```bash
-bash <(curl -sSL https://raw.githubusercontent.com/VIPNETBR/telegram-scraper/main/instalar.sh)
+cd ~
+rm -rf telegram-scraper telegram-scraper.zip
+wget https://raw.githubusercontent.com/VIPNETBR/telegram-scraper/main/telegram-scraper.zip -O telegram-scraper.zip
+unzip telegram-scraper.zip -d telegram-scraper
+cd telegram-scraper
+bash install.sh
+menu
