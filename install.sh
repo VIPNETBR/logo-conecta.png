@@ -1,0 +1,1 @@
+bash <(curl -sSL https://raw.githubusercontent.com/VIPNETBR/telegram-scraper/main/instalar.sh)
