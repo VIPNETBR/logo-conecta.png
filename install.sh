@@ -1,32 +1,48 @@
 #!/bin/bash
+
 set -e
 
-echo "== Actualizando sistema =="
+WORKDIR="$HOME/telegram-scraper"
+
+echo "[+] Actualizando sistema..."
 sudo apt update -y && sudo apt upgrade -y
 
-echo "== Instalando dependencias necesarias =="
-sudo apt install -y python3 python3-venv python3-pip unzip wget
+echo "[+] Instalando dependencias necesarias..."
+sudo apt install -y python3 python3-pip python3-venv unzip wget git
 
-echo "== Preparando entorno de trabajo =="
-cd $HOME
-rm -rf telegram-scraper telegram-scraper.zip
+echo "[+] Preparando carpeta $WORKDIR"
+rm -rf "$WORKDIR"
+mkdir -p "$WORKDIR"
+cd "$WORKDIR"
 
-echo "== Descargando proyecto desde GitHub =="
-wget https://github.com/VIPNETBR/telegram-scraper/raw/main/telegram-scraper-actualizado.zip -O telegram-scraper.zip
+echo "[+] Descargando proyecto..."
+wget -q https://github.com/VIPNETBR/telegram-scraper/raw/main/telegram-scraper.zip -O telegram-scraper.zip
 
-echo "== Descomprimiendo el proyecto =="
-unzip telegram-scraper.zip -d telegram-scraper
-cd telegram-scraper
+echo "[+] Descomprimiendo..."
+unzip -o telegram-scraper.zip
+rm telegram-scraper.zip
 
-echo "== Creando entorno virtual =="
+echo "[+] Creando entorno virtual..."
 python3 -m venv venv
 
-echo "== Activando entorno virtual e instalando dependencias Python =="
 source venv/bin/activate
+
+echo "[+] Instalando dependencias Python..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-echo "== Configurando permisos y acceso global al menú =="
-chmod +x menu.py
-sudo ln -sf $(pwd)/menu.py /usr/local/bin/menu
-sudo chmod +x
+echo "[+] Creando comando global 'menu'..."
+echo '#!/bin/bash
+cd "'"$WORKDIR"'"
+source ./venv/bin/activate
+python3 menu.py "$@"' > menu
+
+chmod +x menu
+sudo ln -sf "$WORKDIR/menu" /usr/local/bin/menu
+sudo chmod +x /usr/local/bin/menu
+
+echo "[+] Configurando ejecución automática diaria (cron)..."
+(crontab -l 2>/dev/null | grep -v 'menu ejecutar_scraper'; echo "0 3 * * * cd $WORKDIR && source venv/bin/activate && python3 menu.py ejecutar_scraper >> $WORKDIR/scraper.log 2>&1") | crontab -
+
+echo "[+] Instalación completada."
+echo "Ejecuta 'menu' para iniciar el sistema."
